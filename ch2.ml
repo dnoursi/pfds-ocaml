@@ -116,4 +116,12 @@ struct
           | 0 -> s
           | n when n < 0 -> Tree (insert x l, y, r)
           | _ -> Tree (l, y, insert x r)
+  let rec complete x d = 
+    match d with
+      | 1 -> Tree (Empty, x, Empty)
+      | 2 -> Tree (d, x, Empty)
+      | _ -> 
+        match d % 2 with 
+          | 0 -> Tree (complete x (d/2), x, complete x ((d/2)-1))
+          | _ -> Tree (complete x (d/2), x, complete x (d/2))
 end
